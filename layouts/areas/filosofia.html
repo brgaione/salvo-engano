@@ -1,0 +1,93 @@
+{{ define "main" }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<div class="post-description">{{ . }}</div>{{ end }}
+</header>
+
+<div class="post-content">
+    {{ .Content }} <!-- Exibe o conteúdo do filosofia.md -->
+</div>
+
+<div class="filosofia-navigation">
+    <div class="nav-grid">
+
+        {{/* Períodos Históricos - Listar termos da taxonomia 'periodos' */}}
+        {{ $periodos := .Site.Taxonomies.periodos }} {{/* Ajustado para chave plural */}}
+        {{ if $periodos }}
+        <div class="nav-section">
+            <h2><a href="{{ "/periodos/" | relLangURL }}">Períodos Históricos</a></h2>
+            <ul>
+                {{ range $name, $taxonomy := $periodos.Alphabetical }}
+                <li>
+                    <a href="{{ $taxonomy.Page.Permalink }}">
+                        {{ $taxonomy.Page.Title | default ($name | humanize | title) }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+
+        {{/* Escolas Filosóficas - Listar termos da taxonomia 'escolas' */}}
+        {{ $escolas := .Site.Taxonomies.escolas }} {{/* Ajustado para chave plural */}}
+        {{ if $escolas }}
+        <div class="nav-section">
+            <h2><a href="{{ "/escolas/" | relLangURL }}">Escolas Filosóficas</a></h2>
+            <ul>
+                {{ range $name, $taxonomy := $escolas.Alphabetical }}
+                <li>
+                    <a href="{{ $taxonomy.Page.Permalink }}">
+                        {{ $taxonomy.Page.Title | default ($name | humanize | title) }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+
+    {{/* Temas e Conceitos - Listar termos da taxonomia 'tags', ordenados alfabeticamente */}}
+    {{ $tags := .Site.Taxonomies.tags }} {{/* Ajustado para chave plural */}}
+    {{ if $tags }}
+    <div class="tag-section">
+        <h2><a href="{{ "/tags/" | relLangURL }}">Temas e Conceitos</a></h2>
+        <div class="tag-cloud">
+            {{ range $name, $taxonomy := $tags.Alphabetical }}
+            <a href="{{ $taxonomy.Page.Permalink }}" class="tag">
+                {{ $taxonomy.Page.Title | default ($name | humanize) }}
+                <small>({{ $taxonomy.Count }})</small>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+</div>
+
+{{/* Estilos CSS podem ser mantidos ou ajustados conforme necessário. Adicionei um estilo para os links de título de seção. */}}
+<style>
+/* ... (Seu CSS existente) ... */
+.search-container { margin: 2rem 0; }
+#search-input { width: 100%; padding: 1rem; font-size: 1.2rem; border: 2px solid var(--border); border-radius: 8px; background: var(--entry); color: var(--primary); }
+.filosofia-navigation { margin: 2rem 0; }
+.nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+.nav-section { background: var(--entry); padding: 1.5rem; border-radius: 8px; }
+.nav-section h2 { margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+.nav-section h2 a, .tag-section h2 a { text-decoration: none; color: inherit; /* Ou sua cor primária */ }
+.nav-section h2 a:hover, .tag-section h2 a:hover { text-decoration: underline; }
+.nav-section ul { list-style: none; padding: 0; }
+.nav-section li { margin: 0.5rem 0; }
+.nav-section a { display: flex; justify-content: space-between; padding: 0.5rem; text-decoration: none; color: var(--primary); border-radius: 4px; }
+.nav-section a:hover { background: var(--hover); }
+.count { color: var(--secondary); font-size: 0.9em; }
+.tag-section { margin-top: 2rem; padding: 1.5rem; background: var(--entry); border-radius: 8px; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { display: inline-block; padding: 0.25rem 0.75rem; background: var(--tertiary); border-radius: 15px; font-size: 0.9rem; text-decoration: none; color: var(--primary); transition: background-color 0.2s; }
+.tag:hover { background: var(--secondary); color: var(--theme); }
+.tag small { opacity: 0.7; }
+#search-results { margin-top: 1rem; }
+.search-result { padding: 1rem; margin: 1rem 0; background: var(--entry); border-radius: 8px; }
+@media (max-width: 768px) { .nav-grid { grid-template-columns: 1fr; } }
+</style>
+{{ end }}

@@ -1,0 +1,63 @@
+{{ define "main" }}
+{{/* Busca a página de conteúdo de /areas/filosofia/ */}}
+{{ $filosofiaPage := .Site.GetPage "/areas/filosofia" }}
+
+<header class="page-header">
+    {{/* Usa o título da página /areas/filosofia.md */}}
+    <h1>{{ $filosofiaPage.Title | default "Filosofia" }}</h1>
+    {{/* Exibe a descrição da página /areas/filosofia.md, se existir */}}
+    {{ with $filosofiaPage.Description }}
+        <div class="post-description">{{ . }}</div>
+    {{ end }}
+</header>
+
+<div class="post-content">
+    {{/* Exibe o conteúdo principal processado da página /areas/filosofia.md */}}
+    {{ $filosofiaPage.Content }}
+</div>
+
+{{/* Estilos CSS básicos. Idealmente, muitos desses estilos viriam do seu tema. */}}
+<style>
+.post-description {
+    margin-bottom: 1.5em;
+    font-size: 1.1em;
+    /* Adicione outros estilos para a descrição se desejar */
+}
+
+.post-content h2 { /* Estilo para os títulos como "Períodos Históricos" no seu Markdown */
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+    font-size: 1.8em; /* Ajuste conforme necessário */
+}
+
+.post-content h2 a { /* Se você transformar os títulos h2 em links no Markdown */
+    text-decoration: none;
+    color: var(--primary);
+}
+.post-content h2 a:hover {
+    text-decoration: underline;
+}
+
+.post-content ul {
+    list-style: none; /* Remove marcadores de lista padrão */
+    padding-left: 0; /* Remove padding padrão da lista */
+}
+
+.post-content ul li {
+    margin-bottom: 0.6em; /* Espaço entre os itens da lista */
+}
+
+.post-content ul li a {
+    text-decoration: none;
+    color: var(--primary); /* Cor de link do seu tema */
+    font-size: 1.1em; /* Ajuste o tamanho dos links dos itens */
+}
+
+.post-content ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Remova ou ajuste a seção .direct-link-section se não for mais necessária */
+/* .direct-link-section { ... } */
+</style>
+{{ end }}

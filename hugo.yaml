@@ -1,0 +1,101 @@
+baseURL: https://salvoengano.netlify.app/
+languageCode: pt-br
+title: salvo engano
+theme: ["PaperMod"]
+
+# Outputs
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+  section:
+    - HTML
+    - RSS
+    - JSON
+  taxonomy:
+    - HTML
+    - RSS
+    - JSON
+  term:
+    - HTML
+    - RSS
+    - JSON
+
+# Taxonomia
+taxonomies:
+  areas: areas
+  periodos: periodos
+  escolas: escolas
+  filosofos: filosofos
+  tags: tags
+
+# Configurações do menu
+menu:
+  main:
+    - identifier: filosofia
+      name: FILOSOFIA
+      url: /
+      weight: 5
+    - identifier: mitologia
+      name: MITOLOGIA
+      url: /areas/mitologia/
+      weight: 20
+    - identifier: literatura
+      name: LITERATURA
+      url: /areas/literatura/
+      weight: 30
+    - identifier: religiao
+      name: RELIGIÃO
+      url: /areas/religiao/
+      weight: 40
+    - identifier: sobre
+      name: SOBRE
+      url: /sobre/
+      weight: 50
+
+# Submenu de Filosofia
+# (Esta seção de menu não está sendo usada por menus padrão,
+#  mas pode ser usada por templates customizados. Pode manter ou remover.)
+#  filosofia:
+#    - ...
+
+# Configurações do PaperMod
+params:
+  # Configurações de exibição
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  ShowTaxonomyLinks: true
+  
+  # Configurações de taxonomia
+  showtoc: true
+  tocopen: false
+  
+  # Configurações de sidebar
+  displaySidebar: true
+  sidebarLayout: "filters"
+
+  # Configurações de Taxonomia (Filtros que podem ser usados em sidebars)
+  taxonomyFilters:
+    periodos:
+      - filosofia-antiga
+      - filosofia-medieval
+      - filosofia-moderna
+      - filosofia-contemporanea
+    
+    escolas:
+      filosofia-antiga:
+        - pre-socraticos
+        - socraticos
+        - platonismo
+        - aristotelismo
+        - estoicismo
+        - epicurismo
+      filosofia-moderna:
+        - humanismo-renascentista
+        - racionalismo
+        - empirismo
+        - iluminismo
