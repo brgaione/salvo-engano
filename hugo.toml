@@ -1,4 +1,4 @@
-baseURL = 'https://seu-usuario.github.io/salvo-engano/'
+baseURL = 'https://brgaione.github.io/salvo-engano/'
 languageCode = 'pt-br'
 title = 'Salvo Engano'
 theme = 'hugo-theme-relearn'
