@@ -1,0 +1,87 @@
+{{ define "main" }}
+<article class="main-article">
+    <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{- with .Description }}
+            <div class="page-description">{{ . }}</div>
+        {{- end }}
+        {{- with .Content }} {{/* Para _index.md dentro das pastas de termos, se você usar */}}
+            <div class="page-content">{{ . }}</div>
+        {{- end }}
+    </header>
+
+    {{ $pages := .Pages }}
+    {{/* Se usar paginação, substitua a linha acima por: */}}
+    {{/* {{ $pages := .Paginator.Pages }} */}}
+
+    {{ if $pages }}
+    <div class="posts-list">
+        {{ range $pages.ByTitle }} {{/* Ou .ByDate.Reverse, ou como preferir ordenar os filósofos */}}
+        <article class="post-entry">
+            <header class="entry-header">
+                <h2>
+                    <a href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a>
+                </h2>
+            </header>
+            {{/* Exibe a descrição do filósofo */}}
+            {{ with .Description }}
+            <div class="entry-content">
+                <p>{{ . }}</p>
+            </div>
+            {{ else with .Summary }}
+             <div class="entry-content">
+                {{ . }} {{/* Fallback para o resumo se não houver descrição */}}
+            </div>
+            {{ end }}
+        </article>
+        {{ end }}
+    </div>
+    {{ else }}
+        <p>Nenhum filósofo encontrado para {{ .Title | lower }}.</p>
+    {{ end }}
+
+    {{/* Se você habilitou paginação, adicione o partial de paginação */}}
+    {{/* {{ partial "pagination.html" . }} */}}
+
+</article>
+
+{{/* Estilos CSS básicos. Você pode precisar ajustar ou adicionar mais estilos
+     para que se adeque ao visual do PaperMod, ou remover estilos que
+     eram aplicados à sidebar que não existe mais. */}}
+<style>
+    .main-article {
+        /* Remova ou ajuste qualquer estilo que presuma uma sidebar, como max-width restrito */
+    }
+    .page-header {
+        margin-bottom: 2rem;
+    }
+    .page-description,
+    .page-content {
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+        color: var(--secondary); /* Ajuste a cor conforme seu tema */
+    }
+    .posts-list .post-entry {
+        margin-bottom: 2.5rem;
+        padding: 1.5rem; /* Adiciona um pouco de padding para destacar cada entrada */
+        background: var(--entry); /* Usa a cor de fundo da entrada do tema */
+        border-radius: var(--radius); /* Usa o raio da borda do tema */
+        /* box-shadow: var(--shadow); /* Opcional: adiciona uma sombra */
+    }
+    .posts-list .post-entry .entry-header h2 {
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+    }
+    .posts-list .post-entry .entry-header h2 a {
+        text-decoration: none;
+        color: var(--primary);
+    }
+    .posts-list .post-entry .entry-header h2 a:hover {
+        text-decoration: underline;
+    }
+    .posts-list .post-entry .entry-content p {
+        margin-bottom: 0;
+        color: var(--secondary);
+    }
+</style>
+{{ end }}

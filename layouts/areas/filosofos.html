@@ -1,0 +1,104 @@
+{{ define "main" }}
+<header class="page-header">
+    <h1>Filósofos</h1>
+    <p>Explore os filósofos por período, escola e temas.</p>
+</header>
+
+<div class="filosofos-navigation">
+    <div class="nav-grid">
+        <div class="nav-section">
+            <h2>Filósofos em Destaque</h2>
+            <ul>
+                {{ range $name, $taxonomy := .Site.Taxonomies.filosofo }}
+                <li>
+                    <a href="/filosofos/{{ $name | urlize }}">
+                        {{ $name | humanize | title }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <h2>Escolas Filosóficas</h2>
+            <ul>
+                {{ range $name, $taxonomy := .Site.Taxonomies.escola }}
+                <li>
+                    <a href="/escolas/{{ $name | urlize }}">
+                        {{ $name | humanize | title }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <h2>Períodos Históricos</h2>
+            <ul>
+                {{ range $name, $taxonomy := .Site.Taxonomies.periodo }}
+                <li>
+                    <a href="/periodos/{{ $name | urlize }}">
+                        {{ $name | humanize | title }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+.filosofos-navigation {
+    margin: 2rem 0;
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.nav-section {
+    background: var(--entry);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.nav-section h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.nav-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-section li {
+    margin: 0.5rem 0;
+}
+
+.nav-section a {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: var(--primary);
+    border-radius: 4px;
+}
+
+.nav-section a:hover {
+    background: var(--hover);
+}
+
+.count {
+    color: var(--secondary);
+    font-size: 0.9em;
+}
+</style>
+{{ end }}

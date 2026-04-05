@@ -1,0 +1,84 @@
+{{ define "main" }}
+{{/* ARQUIVO CORRETO*/}}
+<!-- USANDO O LAYOUT CORRETO: ZLOGIK/layouts/taxonomy/term.html -->
+
+<article class="main-article">
+    <header class="page-header">
+        <h1>{{ .Title }}</h1>
+        {{- with .Description }}
+            <div class="page-description">{{ . }}</div>
+        {{- end }}
+        {{- with .Content }} {{/* Para _index.md dentro das pastas de termos, se você usar */}}
+            <div class="page-content">{{ . }}</div>
+        {{- end }}
+    </header>
+
+    {{ $pages := .Pages }}
+    {{/* Se quiser paginação, use: {{ $pages := .Paginator.Pages }} */}}
+
+    {{ if $pages }}
+    <div class="posts-list">
+        {{ range sort $pages ".Params.chronology" "asc" }} {{/* Ou .ByDate.Reverse, como preferir */}}
+        <article class="post-entry">
+            <header class="entry-header">
+                <h2>
+                    <a href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a>
+                </h2>
+            </header>
+            {{ with .Description }}
+            <div class="entry-content">
+                <p>{{ . }}</p>
+            </div>
+            {{ else with .Summary }}
+             <div class="entry-content">
+                {{ . }}
+            </div>
+            {{ end }}
+        </article>
+        {{ end }}
+    </div>
+    {{ else }}
+        <p>Nenhum artigo encontrado para o termo "{{ .Title | lower }}".</p>
+    {{ end }}
+
+    {{/* Se usar paginação, descomente: {{ partial "pagination.html" . }} */}}
+
+</article>
+
+<style>
+    /* Estilos para a lista de posts - você pode ajustar conforme necessário */
+    .main-article {
+        /* Seus estilos aqui */
+    }
+    .page-header {
+        margin-bottom: 2rem;
+    }
+    .page-description,
+    .page-content {
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+        color: var(--secondary);
+    }
+    .posts-list .post-entry {
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        background: var(--entry);
+        border-radius: var(--radius);
+    }
+    .posts-list .post-entry .entry-header h2 {
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+    }
+    .posts-list .post-entry .entry-header h2 a {
+        text-decoration: none;
+        color: var(--primary);
+    }
+    .posts-list .post-entry .entry-header h2 a:hover {
+        text-decoration: underline;
+    }
+    .posts-list .post-entry .entry-content p {
+        margin-bottom: 0;
+        color: var(--secondary);
+    }
+</style>
+{{ end }}

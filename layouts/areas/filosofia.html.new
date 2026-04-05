@@ -1,0 +1,191 @@
+{{ define "main" }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    <div class="post-description">
+        {{ .Description }}
+    </div>
+</header>
+
+<div class="post-content">
+    {{ .Content }}
+</div>
+
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Buscar por filósofos, escolas, períodos ou temas...">
+    <div id="search-results"></div>
+</div>
+
+<div class="filosofia-navigation">
+    <div class="nav-grid">
+        <div class="nav-section">
+            <h2>Períodos Históricos</h2>
+            <ul>
+                {{ range $name, $taxonomy := .Site.Taxonomies.periodo }}
+                <li>
+                    <a href="/periodos/{{ $name | urlize }}">
+                        {{ $name | humanize | title }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <h2>Escolas Filosóficas</h2>
+            <ul>
+                {{ range $name, $taxonomy := .Site.Taxonomies.escola }}
+                <li>
+                    <a href="/escolas/{{ $name | urlize }}">
+                        {{ $name | humanize | title }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <h2>Filósofos em Destaque</h2>
+            <ul>
+                {{ range $name, $taxonomy := first 10 .Site.Taxonomies.filosofo }}
+                <li>
+                    <a href="/filosofos/{{ $name | urlize }}">
+                        {{ $name | humanize | title }}
+                        <span class="count">({{ $taxonomy.Count }})</span>
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+
+    <div class="tag-section">
+        <h2>Temas e Conceitos</h2>
+        <div class="tag-cloud">
+            {{ range $name, $taxonomy := first 40 .Site.Taxonomies.tag }}
+            <a href="/tags/{{ $name | urlize }}" class="tag">
+                {{ $name | humanize }}
+                <small>({{ $taxonomy.Count }})</small>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+<style>
+.search-container {
+    margin: 2rem 0;
+}
+
+#search-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--entry);
+    color: var(--primary);
+}
+
+.filosofia-navigation {
+    margin: 2rem 0;
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.nav-section {
+    background: var(--entry);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.nav-section h2 {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.nav-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-section li {
+    margin: 0.5rem 0;
+}
+
+.nav-section a {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: var(--primary);
+    border-radius: 4px;
+}
+
+.nav-section a:hover {
+    background: var(--hover);
+}
+
+.count {
+    color: var(--secondary);
+    font-size: 0.9em;
+}
+
+.tag-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: var(--entry);
+    border-radius: 8px;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--tertiary);
+    border-radius: 15px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--primary);
+    transition: background-color 0.2s;
+}
+
+.tag:hover {
+    background: var(--secondary);
+    color: var(--theme);
+}
+
+.tag small {
+    opacity: 0.7;
+}
+
+#search-results {
+    margin-top: 1rem;
+}
+
+.search-result {
+    padding: 1rem;
+    margin: 1rem 0;
+    background: var(--entry);
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .nav-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{{ end }}

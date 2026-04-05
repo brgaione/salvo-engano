@@ -1,0 +1,11 @@
+// settings.json
+{
+  "mcp": {
+    "servers": {
+      "browsermcp": {
+      "command": "npx",
+      "args": ["@browsermcp/mcp@latest"]
+    }
+    }
+  }
+}
