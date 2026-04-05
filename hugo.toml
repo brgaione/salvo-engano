@@ -3,10 +3,6 @@ languageCode = 'pt-br'
 title = 'Salvo Engano'
 theme = 'hugo-theme-relearn'
 
-[params]
-  description = 'Meu blog pessoal criado com Hugo e o tema Relearn'
-  author = 'Seu Nome'
-  
 [params.relearnVariant]
   themeVariant = 'zen-light'
   
