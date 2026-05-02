@@ -1,0 +1,21 @@
+{{- $title := .Get "title" -}}
+{{- $icon := .Get "icon" -}}
+{{- $subtitle := .Get "subtitle" -}}
+
+<div class="card" style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.5rem; margin: 1rem 0; background: #fafafa;">
+  {{- with $icon -}}
+  <div style="font-size: 2rem; margin-bottom: 0.5rem;"><i class="{{ . }}"></i></div>
+  {{- end -}}
+  
+  {{- with $title -}}
+  <h3 style="margin: 0.5rem 0; color: #1a1a1a;">{{ . }}</h3>
+  {{- end -}}
+  
+  {{- with $subtitle -}}
+  <p style="margin: 0.5rem 0; color: #666; font-style: italic;">{{ . }}</p>
+  {{- end -}}
+  
+  <div style="margin-top: 1rem;">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

@@ -1,16 +1,22 @@
-# Generated files
-/public/
-/resources/
-
-# Hugo
+```
+# Build artifacts
+public/
+resources/
 .hugo_build.lock
 
-# IDE
+# Dependencies
+node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
+```

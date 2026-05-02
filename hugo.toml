@@ -1,16 +1,71 @@
 baseURL = 'https://brgaione.github.io/salvo-engano/'
+defaultContentLanguage = 'pt-br'
 languageCode = 'pt-br'
 title = 'Salvo Engano'
 theme = 'hugo-theme-relearn'
 
+# Configuração do tema Relearn
+[params]
+  author.name = 'Salvo Engano'
+  
+  # Logo e título do link
+  titleSeparator = '::'
+  
+  [params.logo]
+    src = 'images/logo.svg'
+    direction = 'row'
+  
+  # Menu lateral
+  alwaysopen = false
+  editURL = ''
+  
+  # Opções de exibição
+  breadcrumbs = true
+  toc = true
+  mathJax = false
+  
+  # Botões de navegação
+  disableLandingPageButton = false
+  disableBreadcrumb = false
+  disableNextPrev = false
+  disableHistory = true
+  disableSeoHiddenPages = true
+  
+  # Variantes de tema (cores)
+[[params.themeVariant]]
+  identifier = 'auto'
+  name = 'Auto'
+  auto = [ 'zen-light', 'zen-dark' ]
+  
+[[params.themeVariant]]
+  identifier = 'zen-light'
+  name = 'Claro'
+  
+[[params.themeVariant]]
+  identifier = 'zen-dark'
+  name = 'Escuro'
+
 [params.relearnVariant]
-  themeVariant = 'zen-light'
+  themeVariant = 'auto'
   
 [params.relearnTheme]
   themeAuto = true
   
+  # Ícone do site (favicon)
+  [params.favicon]
+    icon = 'favicon.ico'
+    iconSVG = 'images/favicon.svg'
+
+[search]
+  disable = false
+
 [languages]
   [languages.pt-br]
     languageName = 'Português'
     languageCode = 'pt-br'
     weight = 1
+    title = 'Salvo Engano'
+    
+    [languages.pt-br.params]
+      landingPageName = '<i class="fa-fw fas fa-home"></i> Início'
+      description = 'Blog pessoal'
