@@ -1,0 +1,24 @@
+{{- $containerstyle := .Get "containerstyle" | default "div" -}}
+{{- $style := .Get "style" | default "" -}}
+{{- $page := .Page -}}
+
+<{{ $containerstyle }}{{ with $style }} style="{{ . | safeCSS }}"{{ end }}>
+{{- range $page.Pages.ByDate.Reverse }}
+  <div style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa;">
+    <h4 style="margin: 0 0 0.5rem 0;">
+      <a href="{{ .RelPermalink }}" style="color: #3B82F6; text-decoration: none;">
+        {{ .Title }}
+      </a>
+    </h4>
+    {{- with .Params.description }}
+      <p style="margin: 0.5rem 0; color: #666; font-size: 0.9rem;">{{ . }}</p>
+    {{- end }}
+    <p style="margin: 0.5rem 0; color: #999; font-size: 0.8rem;">
+      {{ .Date.Format "02/01/2006" }}
+      {{- with .Params.tags }}
+        | Tags: {{ delimit . ", " }}
+      {{- end }}
+    </p>
+  </div>
+{{- end }}
+</{{ $containerstyle }}>
